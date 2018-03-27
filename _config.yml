@@ -100,3 +100,5 @@ deploy:
   type: git
   repo: git@github.com:qiaoqiaowang/qiaoqiaowang.github.io.git
   branch: master
+  name: qiaoqiaowang
+  email: 23080005+qiaoqiaowang@users.noreply.github.com
