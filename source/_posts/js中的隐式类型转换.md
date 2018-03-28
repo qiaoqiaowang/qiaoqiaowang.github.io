@@ -24,7 +24,7 @@ tags:
 	
 	整个表达式最后转化为:
 	'10' == 10  true
-	
+	<!-- more -->
 ##### 以上转化涉及到这几个知识点，我们一一来揭开:
 
 ###### 1) +[] 涉及到的操作符为一元+
@@ -38,11 +38,11 @@ tags:
    var ref = [];
    ++ref
    
-![](/images/1.jpg)
+![console执行结果图](/images/1.jpg)
 
 我们看下es5的文档是这么定义的：
 
-   ![](/images/2.jpg)
+   ![es5文档](/images/2.jpg)
    
 	++[] 等价于
 	1 + ToNumber(GetValue([])) = 1 + 0 = 1
