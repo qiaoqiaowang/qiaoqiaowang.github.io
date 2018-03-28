@@ -38,11 +38,11 @@ tags:
    var ref = [];
    ++ref
    
-![console执行结果图](/images/1.jpg)
+![hexo-github-pages博客部署环境文件目录](/images/1.png)
 
 我们看下es5的文档是这么定义的：
 
-   ![es5文档](/images/2.jpg)
+![es5文档](/images/2.png)
    
 	++[] 等价于
 	1 + ToNumber(GetValue([])) = 1 + 0 = 1
