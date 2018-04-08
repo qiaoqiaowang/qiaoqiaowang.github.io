@@ -11,7 +11,7 @@ tags:
 关于webpack tree shaking的原理以及副作用的分析，有一篇[文章](https://segmentfault.com/a/1190000012794598)写得很好，我就不重复造轮子了，本篇文章带来两个例子，来看下效果。
 
 用到的编译工具(对于本地做这些测试验证，很好用): [webpack-taste](https://github.com/qiaoqiaowang/webpack-taste)
-
+<!-- more -->
 ### 2. Webpack tree Shakigng
  webpack 4增加了 mode参数，在mode 为production的时候，会自动引入UglifyJS，tree shaking才会生效。可以将上述编译工具clone下来，修改webpack.config.js文件中的mode参数为production.
  
