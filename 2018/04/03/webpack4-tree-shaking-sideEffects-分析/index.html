@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="1. 前言早在webpack 2.0的时候， webpack就支持了tree shaking的优化，在webpack 4.0 发布的post中，作者提到新的webpack对编译后的bundle.js的体积增加了新的优化策略：sideEffects: false，这部分内容在webpack 4.0的文档中的tree shaking一节出现。在这之前，对于项目中引用的第三方依赖库，tree shaki">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-08T06:50:49.022Z">
+<meta property="og:updated_time" content="2018-04-08T06:54:57.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack4 tree shaking &amp;&amp; sideEffects 分析">
 <meta name="twitter:description" content="1. 前言早在webpack 2.0的时候， webpack就支持了tree shaking的优化，在webpack 4.0 发布的post中，作者提到新的webpack对编译后的bundle.js的体积增加了新的优化策略：sideEffects: false，这部分内容在webpack 4.0的文档中的tree shaking一节出现。在这之前，对于项目中引用的第三方依赖库，tree shaki">
@@ -175,7 +175,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h3><p>早在webpack 2.0的时候， webpack就支持了tree shaking的优化，在webpack 4.0 发布的post中，作者提到新的webpack对编译后的bundle.js的体积增加了新的优化策略：sideEffects: false，这部分内容在webpack 4.0的文档中的tree shaking一节出现。<br>在这之前，对于项目中引用的第三方依赖库，tree shaking就是一个鸡肋，因为有”side effects”， 特别是经过babel转译之后的代码；并且webpack并没有对代码进行逻辑分析的能力或者说UglifyJS没有流程分析的能力，其实现在的webpack4也没有做到(n a 100% ESM module world, identifying side effects is straightforward. However, we aren’t there just yet),<br>目前sideEffects: false 更像是一种中间状态， 这个选项告诉webpack，这个库是没有”副作用”的，可以大胆的进行代码移除（这里应该是webpack大胆的进行标记，由UglifyJS进行移除）。<br>关于webpack tree shaking的原理以及副作用的分析，有一篇<a href="https://segmentfault.com/a/1190000012794598" target="_blank" rel="noopener">文章</a>写得很好，我就不重复造轮子了，本篇文章带来两个例子，来看下效果。</p>
-<p>用到的编译工具(对于本地做这些测试验证，很好用): <a href="https://github.com/qiaoqiaowang/webpack-taste" target="_blank" rel="noopener">webpack-taste</a></p>
+<p>用到的编译工具(对于本地做这些测试验证，很好用): <a href="https://github.com/qiaoqiaowang/webpack-taste" target="_blank" rel="noopener">webpack-taste</a><br><a id="more"></a></p>
 <h3 id="2-Webpack-tree-Shakigng"><a href="#2-Webpack-tree-Shakigng" class="headerlink" title="2. Webpack tree Shakigng"></a>2. Webpack tree Shakigng</h3><p> webpack 4增加了 mode参数，在mode 为production的时候，会自动引入UglifyJS，tree shaking才会生效。可以将上述编译工具clone下来，修改webpack.config.js文件中的mode参数为production.</p>
 <h5 id="src-math-js"><a href="#src-math-js" class="headerlink" title="src/math.js"></a>src/math.js</h5><pre><code>export function square(x) {
     return x * x;
